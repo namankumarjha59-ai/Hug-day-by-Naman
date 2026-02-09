@@ -293,7 +293,30 @@ requestAnimationFrame(animate);
 })();
 }
 }
-</script>
+function foreverHug(){
+  document.getElementById("foreverPopup").classList.add("active");
+  startForeverSlides();
+}
+
+function closeForever(){
+  document.getElementById("foreverPopup").classList.remove("active");
+}
+
+function startForeverSlides(){
+  const slides = document.querySelectorAll(".foreverSlide");
+  let i = 0;
+
+  slides.forEach(s => s.classList.remove("active"));
+  slides[0].classList.add("active");
+
+  setInterval(() => {
+    slides[i].classList.remove("active");
+    i = (i + 1) % slides.length;
+    slides[i].classList.add("active");
+  }, 2000);
+}
+
+296 </script>
 
 </body>
 </html>
