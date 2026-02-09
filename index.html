@@ -120,6 +120,25 @@ canvas{
   pointer-events:none;
   z-index:1;
 }
+  /* Forever Slides */
+.foreverSlide {
+    display: none;
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.foreverSlide.active {
+    display: block;
+}
+
+/* Forever Popup */
+#foreverPopup {
+    display: none;
+}
+
+#foreverPopup.active {
+    display: block;
+}
 </style>
 </head>
 
@@ -188,8 +207,26 @@ function closePopup(){document.getElementById("popup").classList.remove("active"
 
 // Forever Hug Button
 function foreverHug(){
-alert("Yayyy! Forever starts now 🤗❤️");
-launchFireworks();
+  document.getElementById("foreverPopup").classList.add("active");
+  launchFireworks();
+  startForeverSlides();
+}
+
+function closeForever(){
+  document.getElementById("foreverPopup").classList.remove("active");
+}
+
+function startForeverSlides(){
+  const slides=document.querySelectorAll(".foreverSlide");
+  let i=0;
+  slides.forEach(s=>s.classList.remove("active"));
+  slides[0].classList.add("active");
+
+  setInterval(()=>{
+    slides[i].classList.remove("active");
+    i=(i+1)%slides.length;
+    slides[i].classList.add("active");
+  },2000);
 }
 
 // Music
